@@ -1,6 +1,7 @@
 package com.inn.cafe.serviceimpl;
 
 import com.inn.cafe.JWT.JwtFilter;
+import com.inn.cafe.POJO.Category;
 import com.inn.cafe.POJO.Product;
 import com.inn.cafe.constents.CafeConstants;
 import com.inn.cafe.dao.ProductDao;
@@ -31,8 +32,11 @@ public class ProductServiceImpl implements ProductService
             {
                 if(validateProductMap(requestMap,false))
                 {
-                    
+                    productDao.save(getProductFromMap(requestMap,false));
+                    return CafeUtils.getResponseEntity("Product Added Successfully",HttpStatus.OK);
                 }
+                return CafeUtils.getResponseEntity(CafeConstants.INVALID_DATA,HttpStatus.BAD_REQUEST);
+
             }
             else
                 return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS,HttpStatus.UNAUTHORIZED);
@@ -44,6 +48,45 @@ public class ProductServiceImpl implements ProductService
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private boolean validateProductMap(Map<String, String> requestMap, boolean b) {
+
+
+    private boolean validateProductMap(Map<String, String> requestMap, boolean validateId)
+    {
+        if(requestMap.containsKey("name"))
+        {
+            if(requestMap.containsKey("id") && validateId)
+            {
+                return true;
+            }
+            else if(!validateId)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Product getProductFromMap(Map<String, String> requestMap, boolean isAdd)
+    {
+        Category category = new Category();
+        category.setId(Integer.parseInt(requestMap.get("categoryId")));
+
+        Product product = new Product();
+
+        if(isAdd)
+        {
+            product.setId(Integer.parseInt(requestMap.get("id")));
+        }
+        else
+        {
+            product.setStatus("true");
+        }
+
+        product.setCategory(category);
+        product.setName(requestMap.get("name"));
+        product.setDescription(requestMap.get("description"));
+        product.setPrice(Integer.parseInt(requestMap.get("price")));
+        return product;
+
     }
 }

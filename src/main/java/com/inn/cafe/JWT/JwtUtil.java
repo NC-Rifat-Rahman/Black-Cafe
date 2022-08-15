@@ -19,7 +19,7 @@ public class JwtUtil
 
     public String extractUsername(String token)
     {
-        return extractClaims(token,Claims::getSubject);
+        return extractClaims(token,Claims::getSubject);  // principle user
     }
 
     public Date extractExpiration(String token)
@@ -62,7 +62,7 @@ public class JwtUtil
 
      public Boolean validateToken(String token, UserDetails userDetails)
      {
-         final String username = extractUsername(token);
+         final String username = extractUsername(token); // extract username
          return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
      }
 }

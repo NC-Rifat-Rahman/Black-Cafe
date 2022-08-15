@@ -28,12 +28,13 @@ public class CategoryServiceImpl implements CategoryService
 
     @Autowired
     JwtFilter jwtFilter;
+
     @Override
     public ResponseEntity<String> addNewCategory(Map<String, String> requestMap) {
 
         try
         {
-            if(jwtFilter.isAdmin())
+            if(jwtFilter.isManager())
             {
                 if(validateCategoryMap(requestMap,false))
                 {
@@ -104,7 +105,7 @@ public class CategoryServiceImpl implements CategoryService
     public ResponseEntity<String> updateCategory(Map<String, String> requestMap) {
         try
         {
-            if(jwtFilter.isAdmin())
+            if(jwtFilter.isManager())
             {
                 // validate request map . true to validate id
                 if(validateCategoryMap(requestMap, true))

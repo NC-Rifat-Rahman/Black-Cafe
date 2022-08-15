@@ -7,4 +7,6 @@ import java.util.Map;
 public interface ProductService
 {
     ResponseEntity<String> addNewProduct(Map<String,String> requestMap);
+
+    //ResponseEntity<String> deleteProduct(Map<String,String> requestMap);
 }

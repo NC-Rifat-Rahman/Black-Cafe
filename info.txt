@@ -1,0 +1,1 @@
+- Define secret key. On basis of the secret key json web token is generated
