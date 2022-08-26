@@ -3,7 +3,7 @@ package com.inn.cafe.serviceimpl;
 import com.google.common.base.Strings;
 import com.inn.cafe.JWT.JwtFilter;
 import com.inn.cafe.POJO.Category;
-import com.inn.cafe.constents.CafeConstants;
+import com.inn.cafe.constants.CafeConstants;
 import com.inn.cafe.dao.CategoryDao;
 import com.inn.cafe.service.CategoryService;
 import com.inn.cafe.utils.CafeUtils;
