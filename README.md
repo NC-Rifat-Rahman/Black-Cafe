@@ -1,6 +1,6 @@
 # Black-Cafe
 
-Secured with JWT. It has shopping cart and generates bill pdf.
+Secured with JWT. It has shopping cart,dashboard and generates bill pdf.
 
 #signup <br>
 http://localhost:8080/user/signup
